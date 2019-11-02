@@ -68,29 +68,54 @@ void getInput(vector <Employee *> &Ve){
             case 1:
                 // Get user data
                 cout << "\nEnter the ID: ";
-                cin >> empID;
+                do {
+                    cin >> empID;
+                    if(empID < 0){
+                        cout << "Wrong input. Try again: ";
+                    }
+                } while(empID < 0);
 
                 cout << "Enter the numbers of hours worked: ";
-                cin >> hours;
+                do{
+                    cin >> hours;
+                    if(hours < 0){
+                        cout << "Wrong input. Try again: ";
+                    }
+                } while(hours < 0);
 
                 cout << "Enter the pay rate: ";
-                cin >> payRate;
-                cout << endl;
+                do {
+                    cin >> payRate;
+                    if(payRate < 0){
+                        cout << "Wrong input. Try again: ";
+                    }
+                } while(payRate < 0);
 
                 // Input data into object and store memory address
                 Ve.push_back(new HourlyEmployee(empID, hours, payRate));
+                cout << endl;
 
                 break;
             case 2:
                 cout << "\nEnter the ID: ";
-                cin >> empID;
+                do {
+                    cin >> empID;
+                    if(empID < 0){
+                        cout << "Wrong input. Try again: ";
+                    }
+                } while(empID < 0);
 
                 cout << "Enter the salary: ";
-                cin >> salary;
-                cout << endl;
+                do{
+                    cin >> salary;
+                    if(salary < 0){
+                        cout << "Wrong input. Try again: ";
+                    }
+                } while(salary < 0);
 
                 // Input data into object and store memory address
                 Ve.push_back(new SalariedEmployee(empID, salary));
+                cout << endl;
 
                 break;
         }
@@ -100,7 +125,5 @@ void getInput(vector <Employee *> &Ve){
 void printList(const vector<Employee *> &Ve){
     cout << endl;
 
-    for(int i = 0; i < Ve.size(); i++){
-        Ve[i]->printPay();
-    }
+    for(int i = 0; i < Ve.size(); i++){ Ve[i]->printPay(); }
 }
