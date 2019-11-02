@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 using namespace std;
 
@@ -23,7 +24,10 @@ class HourlyEmployee: public Employee {
         
         double getHours() const { return hours; }
         double getPayRate() const { return payRate; }
-        void printPay() override { cout <<"The pay for the hourly emplyee with ID number " << getEmpID() <<" is $" << (hours * payRate) << endl;}
+        void printPay() override { 
+            cout << setprecision(2) << fixed;
+            cout <<"The pay for the hourly emplyee with ID number " << getEmpID() <<" is $" << (hours * payRate) << endl;
+        }
 };
 
 class SalariedEmployee: public Employee{
@@ -32,13 +36,16 @@ class SalariedEmployee: public Employee{
     public:
         SalariedEmployee(int empID, double salary): Employee(empID){ this->salary = salary; }
         double getSalary() const { return salary; }
-        void printPay() override { cout << "The pay for the salaried employee with ID number " << getEmpID() <<" is $" << (salary / 52) << endl;}
+        void printPay() override { 
+            cout << setprecision(2) << fixed;
+            cout << "The pay for the salaried employee with ID number " << getEmpID() <<" is $" << (salary / 52) << endl;
+        }
 };
 
 // Function prototypes
 void getInput(vector <Employee *> &Ve);
+void printList(const vector<Employee *> &Ve);
 
-/* Completed main function
 int main(){
     vector <Employee *> VEmp;
 
@@ -48,7 +55,6 @@ int main(){
 
     return 0;
 }
-*/
 
 void getInput(vector <Employee *> &Ve){
     int choice, empID;
@@ -72,8 +78,7 @@ void getInput(vector <Employee *> &Ve){
                 cout << endl;
 
                 // Input data into object and store memory address
-                HourlyEmployee hEmp(empID, hours, payRate);
-                Ve.push_back(&hEmp);
+                Ve.push_back(new HourlyEmployee(empID, hours, payRate));
 
                 break;
             case 2:
@@ -85,10 +90,17 @@ void getInput(vector <Employee *> &Ve){
                 cout << endl;
 
                 // Input data into object and store memory address
-                SalariedEmployee sEmp(empID, salary);
-                Ve.push_back(&sEmp);
+                Ve.push_back(new SalariedEmployee(empID, salary));
 
                 break;
         }
     } while(choice != 3);
+}
+
+void printList(const vector<Employee *> &Ve){
+    cout << endl;
+
+    for(int i = 0; i < Ve.size(); i++){
+        Ve[i]->printPay();
+    }
 }
