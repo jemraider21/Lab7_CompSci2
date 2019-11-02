@@ -11,6 +11,21 @@ class Employee {
         virtual void printPay() = 0;
 };
 
+class HourlyEmployee: public Employee {
+    private:
+        double hours;
+        double payRate;
+    public:
+        HourlyEmployee(int empID, double hours, double payRate): Employee(empID){
+            this->hours = hours;
+            this->payRate = payRate;
+        }
+        
+        double getHours() const { return hours; }
+        double getPayRate() const { return payRate; }
+        void printPay() override { cout << (hours * payRate) << endl;}
+};
+
 /* Completed main function
 int main(){
     vector <Employee *> VEmp;
