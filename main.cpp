@@ -2,7 +2,14 @@
 #include <vector>
 using namespace std;
 
-class Employee {};
+class Employee {
+    private:
+        int empID;
+    public:
+        Employee(int empID){this->empID = empID;}
+        int getEmpID() const { return empID; }
+        virtual void printPay() = 0;
+};
 
 /* Completed main function
 int main(){
